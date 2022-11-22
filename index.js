@@ -18,9 +18,13 @@ const server = require('http').createServer(app);
 const publicPath = path.resolve(__dirname, 'public');
 app.use(express.static(publicPath));
 
-// Mis Rutas
+// ---------- Mis Rutas --------------
+
+// Rudas de usuarios
 app.use('/api/login', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
+//Rutas de productos
+app.use('/api/products', require('./routes/products'));
 
 // Server
 server.listen(process.env.PORT, (err) => {
