@@ -14,6 +14,14 @@ const UserSchema = Schema({
         type: String,
         required: true,
     },
+    status: {
+        type: Boolean,
+        default: true,
+    },
+    isWorker: {
+        type: String,
+        default: null,
+    },
 });
 
 // Modificar metodos ya establecidos.
