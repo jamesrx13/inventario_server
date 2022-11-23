@@ -26,7 +26,7 @@ const newProuct = async (req, res = response) => {
 const getAllProducts = async (req, res = response) => {
     const { uid } = req;
     try {
-        const products = await Product.find({ propertype: uid });
+        const products = await Product.find({ propertype: uid }).sort('-status');
         return res.status(200).json({
             ok: true,
             products,
