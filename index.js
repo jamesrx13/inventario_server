@@ -25,6 +25,8 @@ app.use('/api/login', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 //Rutas de productos
 app.use('/api/products', require('./routes/products'));
+//Rutas de Proveedores
+app.use('/api/proveedores', require('./routes/proveedores'));
 
 // Server
 server.listen(process.env.PORT, (err) => {

@@ -10,7 +10,7 @@ const newProuct = async (req, res = response) => {
 
         return res.status(200).json({
             ok: true,
-            product,
+            'products': [product],
         });
 
     } catch (error) {
@@ -54,7 +54,7 @@ const updateProduct = async (req, res = response) => {
 
         return res.status(200).json({
             ok: true,
-            product,
+            'products': [product],
         });
 
     } catch (error) {
@@ -74,7 +74,7 @@ const productChangeStatus = async (req, res = response) => {
 
         return res.status(200).json({
             ok: true,
-            product,
+            'products': [product],
         });
 
     } catch (error) {
