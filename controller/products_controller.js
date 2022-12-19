@@ -85,9 +85,76 @@ const productChangeStatus = async (req, res = response) => {
     }
 }
 
+const findProductByName = async (req, res = response) => {
+    try {
+        const { uid, body: { name } } = req;
+
+        if (!name) {
+            return res.status(401).json({
+                ok: false,
+                msg: 'No se recibió un producto a buscar.',
+            })
+        }
+
+        const products = await Product.find({
+            $and: [
+                { propertype: uid },
+                { status: true },
+                { name: { $regex: '.*' + name + '.*', $options: 'i' } },
+            ]
+        }).limit(5);
+
+        console.log(name);
+        return res.status(200).json({
+            ok: true,
+            products,
+        })
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(401).json({
+            ok: false,
+            msg: 'No se recibió un producto a buscar.',
+        })
+    }
+}
+
+const purchaseProduct = async (req, res = response) => {
+    try {
+        const { id, cant } = req.body;
+
+        const product = await Product.findById(id);
+
+        if (!product) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Producto no encontrado',
+            });
+        }
+
+        product.stock += cant;
+        await product.save();
+
+        return res.status(200).json({
+            ok: true,
+            products: [product]
+        });
+
+    } catch (error) {
+
+        return res.status(401).json({
+            ok: false,
+            msg: 'Error al cambiar la existencia',
+        });
+    }
+}
+
 module.exports = {
     newProuct,
     getAllProducts,
     updateProduct,
     productChangeStatus,
+    findProductByName,
+    purchaseProduct,
 }
